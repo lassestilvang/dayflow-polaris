@@ -2,7 +2,11 @@
 
 import { getSession } from "./session";
 
-export class AuthError extends Error {
+/**
+ * Auth-specific error for guard helpers.
+ * Kept internal to this module so that only async server exports are exposed.
+ */
+class AuthError extends Error {
   readonly code: "UNAUTHENTICATED" | "NO_WORKSPACE";
 
   constructor(code: "UNAUTHENTICATED" | "NO_WORKSPACE", message?: string) {
