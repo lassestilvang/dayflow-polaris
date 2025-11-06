@@ -58,7 +58,7 @@ export default async function WeekPage({
   const calendarRows = await db
     .select()
     .from(calendars)
-    .where(calendars.workspaceId.eq(workspaceId));
+    .where(eq(calendars.workspaceId, workspaceId));
 
   const calendarIds = calendarRows.map((c) => c.id);
 
@@ -69,11 +69,12 @@ export default async function WeekPage({
       .select()
       .from(events)
       .where(
-        events.workspaceId
-          .eq(workspaceId)
-          .and(events.calendarId.in(calendarIds))
-          .and(events.start.gte(start))
-          .and(events.start.lt(end))
+        and(
+          eq(events.workspaceId, workspaceId),
+          inArray(events.calendarId, calendarIds),
+          gte(events.start, start),
+          lt(events.start, end)
+        )
       );
   }
 
@@ -82,16 +83,19 @@ export default async function WeekPage({
     .select()
     .from(tasks)
     .where(
-      tasks.workspaceId
-        .eq(workspaceId)
-        .and(
-          // scheduled in range
-          tasks.scheduledStart.gte(start).and(tasks.scheduledStart.lt(end))
-            // OR unscheduled + not archived
-            .or(
-              tasks.scheduledStart.isNull().and(tasks.status.notEq("archived"))
-            )
+      and(
+        eq(tasks.workspaceId, workspaceId),
+        or(
+          and(
+            gte(tasks.scheduledStart, start),
+            lt(tasks.scheduledStart, end)
+          ),
+          and(
+            isNull(tasks.scheduledStart),
+            ne(tasks.status, "archived")
+          )
         )
+      )
     );
 
   const taskIds = taskRows.map((t) => t.id);
