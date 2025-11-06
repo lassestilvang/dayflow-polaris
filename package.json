@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "bun test"
+    "test": "bun test",
+    "drizzle:generate": "drizzle-kit generate",
+    "drizzle:push": "drizzle-kit push"
   },
   "dependencies": {
     "next": "14.2.15",
@@ -30,7 +32,7 @@
     "drizzle-orm": "0.36.3",
     "@neondatabase/serverless": "0.10.4",
     "@upstash/redis": "1.34.3",
-    "@workos-inc/node": "6.16.0"
+    "@workos-inc/node": "8.0.0-rc.3"
   },
   "devDependencies": {
     "@types/node": "22.7.4",
@@ -41,14 +43,5 @@
     "typescript": "5.6.3",
     "@playwright/test": "1.48.2",
     "drizzle-kit": "0.24.0"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "bun test",
-    "drizzle:generate": "drizzle-kit generate",
-    "drizzle:push": "drizzle-kit push"
   }
 }

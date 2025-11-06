@@ -1,5 +1,5 @@
 [install]
-auto = "off"
+auto = "force"
 
 [run]
 bun-path = "bun"
