@@ -1,0 +1,54 @@
+{
+  "name": "dayflow-polaris",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwindcss": "3.4.14",
+    "postcss": "8.4.47",
+    "autoprefixer": "10.4.20",
+    "@radix-ui/react-slot": "1.0.2",
+    "@radix-ui/react-toast": "1.1.5",
+    "@radix-ui/react-dialog": "1.0.5",
+    "@radix-ui/react-label": "2.0.2",
+    "class-variance-authority": "0.7.0",
+    "clsx": "2.1.1",
+    "tailwind-merge": "2.5.2",
+    "lucide-react": "0.474.0",
+    "framer-motion": "11.11.17",
+    "zustand": "5.0.3",
+    "zod": "3.23.8",
+    "drizzle-orm": "0.36.3",
+    "@neondatabase/serverless": "0.10.4",
+    "@upstash/redis": "1.34.3",
+    "@workos-inc/node": "6.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.7.4",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.0",
+    "eslint": "9.13.0",
+    "eslint-config-next": "14.2.15",
+    "typescript": "5.6.3",
+    "@playwright/test": "1.48.2",
+    "drizzle-kit": "0.24.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "bun test",
+    "drizzle:generate": "drizzle-kit generate",
+    "drizzle:push": "drizzle-kit push"
+  }
+}

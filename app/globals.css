@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 220 23% 6%;
+  --foreground: 210 40% 98%;
+
+  --muted: 220 15% 15%;
+  --muted-foreground: 220 10% 65%;
+
+  --accent: 200 98% 52%;
+  --accent-foreground: 210 40% 98%;
+
+  /* Indigo / cyan hybrid primary accent for planner focus */
+  --primary: 222 84% 56%;
+  --primary-foreground: 210 40% 98%;
+
+  --destructive: 0 72% 50%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 220 15% 20%;
+  --input: 220 15% 18%;
+  --ring: 222 84% 56%;
+
+  /* Category semantic colors */
+  --category-work: 222 84% 56%;
+  --category-family: 280 75% 60%;
+  --category-personal: 160 72% 45%;
+  --category-travel: 200 98% 52%;
+}
+
+.dark {
+  --background: 222 30% 6%;
+  --foreground: 210 40% 98%;
+  --muted: 220 15% 12%;
+  --muted-foreground: 220 10% 70%;
+  --accent: 200 98% 52%;
+  --accent-foreground: 210 40% 98%;
+  --primary: 222 84% 60%;
+  --primary-foreground: 210 40% 98%;
+  --destructive: 0 72% 55%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 220 15% 18%;
+  --input: 220 15% 18%;
+  --ring: 222 84% 60%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, -apple-system,
+    system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+#__next {
+  min-height: 100vh;
+}
+
+/* Subtle scrollbars for dark UI */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 253, 0.22);
+  border-radius: 999px;
+}
