@@ -5,7 +5,7 @@ import { randomUUID } from "crypto";
 import { db } from "../db/client";
 import { sessions } from "../db/schema";
 import { eq } from "drizzle-orm";
-import { env } from "../env";
+import { env, isDevAuthBypassEnabled } from "../env";
 import { getJson, setJson, del as delKey } from "../cache/redis";
 
 export interface Session {
@@ -85,7 +85,23 @@ async function loadSessionFromDb(id: string): Promise<Session | null> {
   };
 }
 
+function getDevBypassSession(): Session {
+  const now = new Date();
+  const oneYearMs = 365 * 24 * 60 * 60 * 1000;
+  return {
+    id: "dev-bypass-session",
+    userId: "dev-user",
+    workspaceId: "dev-workspace",
+    createdAt: now,
+    expiresAt: new Date(now.getTime() + oneYearMs)
+  };
+}
+
 export async function getSession(): Promise<Session | null> {
+  if (isDevAuthBypassEnabled) {
+    return getDevBypassSession();
+  }
+
   const cookieStore = await cookies();
   const id = cookieStore.get(SESSION_COOKIE_NAME)?.value;
   if (!id) return null;

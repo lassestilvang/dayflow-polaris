@@ -9,7 +9,8 @@ const baseSchema = z.object({
   WORKOS_CLIENT_ID: z.string().min(1),
   WORKOS_REDIRECT_URI: z.string().url().min(1),
   WORKOS_WEBHOOK_SECRET: z.string().min(1),
-  NODE_ENV: z.enum(["development", "test", "production"])
+  NODE_ENV: z.enum(["development", "test", "production"]),
+  AUTH_DEV_BYPASS: z.enum(["true", "false"]).default("false")
 });
 
 type EnvSchema = z.infer<typeof baseSchema>;
@@ -24,7 +25,8 @@ function loadEnv(): EnvSchema {
     WORKOS_CLIENT_ID: process.env.WORKOS_CLIENT_ID,
     WORKOS_REDIRECT_URI: process.env.WORKOS_REDIRECT_URI,
     WORKOS_WEBHOOK_SECRET: process.env.WORKOS_WEBHOOK_SECRET ?? "unused-for-now",
-    NODE_ENV: process.env.NODE_ENV ?? "development"
+    NODE_ENV: process.env.NODE_ENV ?? "development",
+    AUTH_DEV_BYPASS: process.env.AUTH_DEV_BYPASS ?? "false"
   });
 
   if (!parsed.success) {
@@ -46,7 +48,8 @@ function loadEnv(): EnvSchema {
           "http://localhost:3000/api/auth/workos/callback",
         WORKOS_WEBHOOK_SECRET:
           process.env.WORKOS_WEBHOOK_SECRET ?? "unused-for-now",
-        NODE_ENV: "test"
+        NODE_ENV: "test",
+        AUTH_DEV_BYPASS: process.env.AUTH_DEV_BYPASS ?? "false"
       });
 
       return {
@@ -84,3 +87,10 @@ function loadEnv(): EnvSchema {
 }
 
 export const env = loadEnv();
+
+/**
+ * Returns true only when running in development AND explicit dev auth bypass is enabled.
+ * This ensures production / preview / staging cannot accidentally disable auth.
+ */
+export const isDevAuthBypassEnabled =
+  env.NODE_ENV === "development" && env.AUTH_DEV_BYPASS === "true";
