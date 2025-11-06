@@ -1,5 +1,3 @@
-"use server";
-
 import { Redis } from "@upstash/redis";
 import { env } from "../env";
 
@@ -7,6 +5,10 @@ if (typeof window !== "undefined") {
   throw new Error("Redis client must not be imported in the browser bundle");
 }
 
+/**
+ * Server-only Redis client.
+ * Safe for use in server components and server actions.
+ */
 export const redis = new Redis({
   url: env.UPSTASH_REDIS_REST_URL,
   token: env.UPSTASH_REDIS_REST_TOKEN
