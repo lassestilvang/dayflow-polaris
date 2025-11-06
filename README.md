@@ -20,6 +20,7 @@ It provides a unified weekly planner that consolidates tasks, events, and (mocke
 ## Features
 
 - Authentication and multi-tenancy
+
   - WorkOS-based SSO (organization and user mapping).
   - Neon (Postgres) as primary datastore via Drizzle ORM.
   - Upstash Redis-backed sessions keyed by user and workspace.
@@ -27,6 +28,7 @@ It provides a unified weekly planner that consolidates tasks, events, and (mocke
     - Users, Workspaces, Memberships.
 
 - Core planner UI
+
   - Authenticated app shell under `/app` (protected via `requireSession`).
   - Weekly view at `/app/week/[weekId]`:
     - Time-block calendar grid (Mon–Sun, hourly slots).
@@ -39,6 +41,7 @@ It provides a unified weekly planner that consolidates tasks, events, and (mocke
       - Utilities in [`lib/calendar/conflicts.ts`](lib/calendar/conflicts.ts:1) prevent overlaps in the same calendar.
 
 - Integrations scaffold (mocked)
+
   - Strongly-typed integration abstraction in:
     - [`lib/integrations/types.ts`](lib/integrations/types.ts:1)
     - [`lib/integrations/base.ts`](lib/integrations/base.ts:1)
@@ -52,7 +55,7 @@ It provides a unified weekly planner that consolidates tasks, events, and (mocke
     - [`app/api/integrations/list/route.ts`](app/api/integrations/list/route.ts:1)
     - [`app/api/integrations/mock-sync/route.ts`](app/api/integrations/mock-sync/route.ts:1)
   - UI:
-    - Integrations settings at [`app/(app)/app/settings/integrations/page.tsx`](app/(app)/app/settings/integrations/page.tsx:1)
+    - Integrations settings at [`app/(app)/app/settings/integrations/page.tsx`](<app/(app)/app/settings/integrations/page.tsx:1>)
     - Weekly planner mock banner at [`components/integrations/mock-sync-banner.tsx`](components/integrations/mock-sync-banner.tsx:1)
 
 - UI and UX
@@ -73,17 +76,17 @@ App shell and routing:
 
 - [`app/layout.tsx`](app/layout.tsx:1)
   - Root layout, global ThemeProvider, ToastProvider, dark theme baseline.
-- [`app/(auth)/layout.tsx`](app/(auth)/layout.tsx:1)
+- [`app/(auth)/layout.tsx`](<app/(auth)/layout.tsx:1>)
   - Minimal auth layout.
-- [`app/(auth)/signin/page.tsx`](app/(auth)/signin/page.tsx:1)
+- [`app/(auth)/signin/page.tsx`](<app/(auth)/signin/page.tsx:1>)
   - Sign-in placeholder; wired to WorkOS start endpoint.
-- [`app/(app)/layout.tsx`](app/(app)/layout.tsx:1)
+- [`app/(app)/layout.tsx`](<app/(app)/layout.tsx:1>)
   - Protected app shell; wraps children with AppShell and `requireSession`.
-- [`app/(app)/app/page.tsx`](app/(app)/app/page.tsx:1)
+- [`app/(app)/app/page.tsx`](<app/(app)/app/page.tsx:1>)
   - Redirects to current week: `/app/week/[weekId]`.
-- [`app/(app)/app/week/[weekId]/page.tsx`](app/(app)/app/week/[weekId]/page.tsx:1)
+- [`app/(app)/app/week/[weekId]/page.tsx`](<app/(app)/app/week/[weekId]/page.tsx:1>)
   - Server: loads workspace calendars, events, tasks for a given week.
-- [`app/(app)/app/week/[weekId]/week-planner-page.tsx`](app/(app)/app/week/[weekId]/week-planner-page.tsx:1)
+- [`app/(app)/app/week/[weekId]/week-planner-page.tsx`](<app/(app)/app/week/[weekId]/week-planner-page.tsx:1>)
   - Client: renders weekly planner header, sidebar, calendar grid, and integration banner.
 
 Core components:
@@ -207,9 +210,3 @@ Key routes:
   - Additional validation, error-handling, and test coverage.
 - All external integration calls are mocked at this stage and safe to use in any environment.
 - Keep `.env.local` out of version control.
-
----
-
-## .env.local template
-
-See below for a ready-to-use template.
