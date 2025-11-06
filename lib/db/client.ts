@@ -1,5 +1,3 @@
-"use server";
-
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import { env } from "../env";
@@ -15,6 +13,10 @@ function createClient() {
   return drizzle(sql, { schema });
 }
 
+/**
+ * Server-only db client.
+ * Throws if imported in the browser.
+ */
 export const db =
   typeof window === "undefined"
     ? globalThis.__dayflowDb__ ?? (globalThis.__dayflowDb__ = createClient())
