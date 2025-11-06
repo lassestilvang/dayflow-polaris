@@ -35,13 +35,13 @@
     "@workos-inc/node": "8.0.0-rc.3"
   },
   "devDependencies": {
+    "@playwright/test": "1.48.2",
     "@types/node": "22.7.4",
     "@types/react": "18.3.11",
     "@types/react-dom": "18.3.0",
+    "drizzle-kit": "^0.31.6",
     "eslint": "9.13.0",
     "eslint-config-next": "14.2.15",
-    "typescript": "5.6.3",
-    "@playwright/test": "1.48.2",
-    "drizzle-kit": "0.24.0"
+    "typescript": "5.6.3"
   }
 }
