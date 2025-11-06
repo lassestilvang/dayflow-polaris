@@ -25,12 +25,7 @@
       "next/navigation-types/client"
     ],
     "forceConsistentCasingInFileNames": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
+    "baseUrl": ".",\n    "paths": {\n      "@/*": ["*"]\n    },\n    "plugins": [\n      {\n        "name": "next"\n      }\n    ]\n  },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
