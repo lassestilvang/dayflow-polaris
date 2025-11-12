@@ -74,15 +74,16 @@ export function ThemeProvider({
     if (typeof window === "undefined") return;
 
     const stored = window.localStorage.getItem("dayflow-theme") as Theme | null;
-    if (stored === "light" || stored === "dark" || stored === "system") {
+    if (stored && (stored === "light" || stored === "dark" || stored === "system")) {
       setThemeState(stored);
       const nextResolved = applyThemeClass(stored);
       setResolvedTheme(nextResolved);
     } else {
+      setThemeState(defaultTheme);
       const nextResolved = applyThemeClass(defaultTheme);
       setResolvedTheme(nextResolved);
     }
-  }, [defaultTheme, setTheme]);
+  }, [defaultTheme]);
 
   const value: ThemeContextValue = {
     theme,

@@ -11,7 +11,7 @@ import {
   type Task,
   type TaskLabel
 } from "@/lib/db/schema";
-import { and, eq, gte, lt, inArray, isNull, ne } from "drizzle-orm";
+import { and, eq, gte, lt, inArray, isNull, ne, or } from "drizzle-orm";
 import { requireSession } from "@/lib/auth/guards";
 import { getWeekRangeFromWeekId, getWeekId } from "@/lib/calendar/date-utils";
 import WeekPlannerPage from "./week-planner-page";

@@ -88,10 +88,26 @@ async function loadSessionFromDb(id: string): Promise<Session | null> {
 function getDevBypassSession(): Session {
   const now = new Date();
   const oneYearMs = 365 * 24 * 60 * 60 * 1000;
+
+  // IMPORTANT:
+  // - This must match the real workspace row you created in your dev database.
+  // - Run this with DATABASE_URL and other env vars loaded (e.g. `bunx ts-node scripts/create-dev-workspace.ts`)
+  //   to print the actual DEV_WORKSPACE_ID, then paste it here.
+  const DEV_WORKSPACE_ID =
+    process.env.DEV_WORKSPACE_ID ??
+    "00000000-0000-0000-0000-000000000000"; // placeholder, replace with real UUID
+
+  if (!DEV_WORKSPACE_ID || DEV_WORKSPACE_ID === "00000000-0000-0000-0000-000000000000") {
+    throw new Error(
+      "Dev auth bypass is enabled but DEV_WORKSPACE_ID is not set. " +
+        "Create a dev workspace and set DEV_WORKSPACE_ID in your environment."
+    );
+  }
+
   return {
     id: "dev-bypass-session",
-    userId: "dev-user",
-    workspaceId: "dev-workspace",
+    userId: "00000000-0000-0000-0000-000000000001",
+    workspaceId: DEV_WORKSPACE_ID,
     createdAt: now,
     expiresAt: new Date(now.getTime() + oneYearMs)
   };

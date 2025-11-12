@@ -22,11 +22,16 @@ type CalendarState = {
   endDrag: () => void;
 };
 
-export const useCalendarStore = create<CalendarState>((set) => ({
+export const useCalendarStore = create<CalendarState>((set, get) => ({
   activeWeekId: null,
   dragItem: null,
   dropPreview: null,
-  setActiveWeek: (weekId) => set({ activeWeekId: weekId }),
+  setActiveWeek: (weekId) => {
+    // Avoid unnecessary updates that can cause render loops
+    if (get().activeWeekId !== weekId) {
+      set({ activeWeekId: weekId });
+    }
+  },
   startDrag: (item) => set({ dragItem: item }),
   updateDropPreview: (preview) => set({ dropPreview: preview }),
   endDrag: () => set({ dragItem: null, dropPreview: null })

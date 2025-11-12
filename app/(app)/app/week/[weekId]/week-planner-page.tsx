@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import type {
@@ -58,11 +58,14 @@ export default function WeekPlannerPage({
   tasks
 }: WeekPlannerPageProps): JSX.Element {
   const router = useRouter();
-  const setActiveWeek = useCalendarStore((s) => s.setActiveWeek);
+  const setActiveWeek = useCalendarStore((state) => state.setActiveWeek);
 
-  useMemo(() => {
+  // Sync global calendar store with the current route weekId (one-way; no subscription).
+  useEffect(() => {
+    // Important: only depend on weekId; setActiveWeek is stable and internally idempotent.
     setActiveWeek(weekId);
-  }, [setActiveWeek, weekId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [weekId, setActiveWeek]);
 
   const weekLabel = useMemo(() => formatWeekLabel(weekId), [weekId]);
 

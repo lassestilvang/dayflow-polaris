@@ -105,13 +105,10 @@ export default function WeekViewGrid({
   );
 
   const { open, setOpen } = useToastController();
-  const { dragItem, startDrag, endDrag, updateDropPreview } =
-    useCalendarStore((s) => ({
-      dragItem: s.dragItem,
-      startDrag: s.startDrag,
-      endDrag: s.endDrag,
-      updateDropPreview: s.updateDropPreview
-    }));
+  const dragItem = useCalendarStore((s) => s.dragItem);
+  const startDrag = useCalendarStore((s) => s.startDrag);
+  const endDrag = useCalendarStore((s) => s.endDrag);
+  const updateDropPreview = useCalendarStore((s) => s.updateDropPreview);
 
   const showError = useCallback(
     (message: string) => {
